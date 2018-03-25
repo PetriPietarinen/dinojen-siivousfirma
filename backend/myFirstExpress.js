@@ -21,6 +21,9 @@ Express.js on näppärä alusta tämän kaltaisten juttujen tekemiseen.
 Siitä löytyy ohjetta mm. tuolta: 
 https://www.tutorialspoint.com/expressjs/index.htm    
 */
+const express = require('express');
+const bodyParser = require('body-parser')
+const cors = require('cors');
 
 var portti = 3000;
 
@@ -30,8 +33,12 @@ var siivoojat = [
     {id: 3, name: 'Petteri Orpo', palkka: '950 EUR/kk'}    
 ];
 
-var express = require('express');
+var games = [{name: 'testi', id: 0}];
+var nextId = 1;
+
 var app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/hello', function(req, res){
    res.send('Hello world!');
@@ -39,6 +46,31 @@ app.get('/hello', function(req, res){
 
 app.get('/siivoojat', function(req, res){
    res.json(siivoojat);
+});
+
+app.get('/api/v1/game', function(req, res){
+    res.json(games);
+});
+
+app.get('/api/v1/game/:id', function(req, res){
+    let id = req.params.id;
+
+    let game;
+
+    for(let i = 0; i < games.length; i++){
+        if(games[i]['id'] == id){
+            game = games[i];
+            break;
+        }
+    }
+    res.json(game);
+});
+
+app.post('/api/v1/game', function(req, res) {
+    let game = { id: nextId, name: req.body.name };
+    nextId++;
+    games.push(game);
+    res.json(game);
 });
 
 app.get('/:id', function(req, res){
