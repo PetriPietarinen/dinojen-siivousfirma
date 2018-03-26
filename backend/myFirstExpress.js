@@ -33,16 +33,17 @@ const cors = require('cors');
 var portti = 3000;
 
 var houses = [
-    {id: 1,	name: 'Kanjoninkatu 3', done: 0},
+    {id: 0,	name: 'Tiaisentie 15', kissa: 'koira', done: 0},
+    {id: 1,	name: 'Kanjoninkatu 3', kissa: 'miau', done: 0},
     {id: 2,	name: 'Vilppulanpolku 6', done: 0},
     {id: 3,	name: 'Nosturinraitti 2', done: 0},
     {id: 4,	name: 'Kanjoninkatu 11', done: 0},
     {id: 5,	name: 'Lindforsinkatu 12', done: 0},
-    {id: 6,	name: 'Insinöörinkatu 52', done: 0},
+    {id: 6,	name: 'Insinöörinkatu 52', done: 1},
     {id: 7,	name: 'Kanjoninkatu 5', done: 0},
     {id: 8,	name: 'Insinöörinkatu 22', done: 0},
     {id: 9,	name: 'Kemiankatu 4', done: 0},
-    {id: 10, name: 'Insinöörinkatu 24', done: 0},
+    {id: 10, name: 'Insinöörinkatu 24', done: 1},
     {id: 11, name: 'Opiskelijankatu 15', done: 0},
     {id: 12, name: 'Orivedenkatu 20', done: 0},
     {id: 13, name: 'Opinpolku 1', done: 0},
@@ -100,6 +101,42 @@ app.get('/api/v1/houses/:id', function(req, res){
     res.json(house);
 });
 
+// tilan muutos tähän, get, post vai mikä?
+
+app.post('/api/v1/done/:id', function(req, res){
+    let id = req.params.id;
+ 
+     let house;
+     let state;
+ 
+     for(let i = 0; i < houses.length; i++){
+         if(houses[i]['id'] == id){
+             house = houses[i];
+             state = houses[i].done;
+             houses[i].done=1;
+             break;
+         }
+     }
+  
+     res.json(state);
+ });
+// tilan tarkastus
+app.get('/api/v1/state/:id', function(req, res){
+   let id = req.params.id;
+
+    let house;
+    let state;
+
+    for(let i = 0; i < houses.length; i++){
+        if(houses[i]['id'] == id){
+            house = houses[i];
+            state = houses[i].done;
+            break;
+        }
+    }
+    console.log(state);
+    res.json(state);
+});
 
 app.get('/api/v1/game/:id', function(req, res){
     let id = req.params.id;
