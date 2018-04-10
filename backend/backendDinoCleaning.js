@@ -85,6 +85,9 @@ app.get('/' + apiName + '/houses', function(req, res){
 // Heataan siivouskohde id:n perusteella
 app.get('/' + apiName + '/houses/:id', function(req, res){
     let id = req.params.id;
+
+    console.log('Haetaan tiedot talosta: ' + id);
+
     db.getHouseById(id, function(err, data) {
         if (err)
         {
@@ -94,6 +97,7 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
         else if (data)
         {
             res.json(data);   
+            console.log(data);
         }
         else
         {
@@ -109,7 +113,12 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
 app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
     let id = req.params.id;
     let state = req.params.state;
-    db.setHouseState(id, state, function(err) {
+    let aika =  Date.now();
+   
+       
+    console.log('Siivotaan talo: ' + id + '  -  Kello:  ' + aika);
+
+    db.setHouseState(id, state, aika, function(err) {
        if (err)
        {
             res.status(500);
