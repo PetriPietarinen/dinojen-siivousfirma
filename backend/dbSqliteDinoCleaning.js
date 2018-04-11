@@ -37,9 +37,9 @@ exports.getHouseById = function(id, callback) {
     });
 };
 
-exports.setHouseState = function(id, state, aika, callback) {
-    let sql = 'UPDATE houses SET done = ?, lastdone = ? WHERE id = ?';
-    let data = [state, aika, id];
+exports.setHouseState = function(id, state, date, time, callback) {
+    let sql = 'UPDATE houses SET done = ?, date = ?, time = ? WHERE id = ?';
+    let data = [state, date, time, id];
     db.run(sql, data, function(err) {
         if (err)
         {

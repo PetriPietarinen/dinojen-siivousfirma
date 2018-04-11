@@ -113,12 +113,15 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
 app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
     let id = req.params.id;
     let state = req.params.state;
-    let aika =  Date.now();
+    let currentdate = new Date(); 
+    let date = currentdate.getDate() + "." + (currentdate.getMonth()+1)  + "." + currentdate.getFullYear();
+    let time = currentdate.getHours() + ":" + currentdate.getMinutes();
+
    
        
-    console.log('Siivotaan talo: ' + id + '  -  Kello:  ' + aika);
+    console.log('Siivotaan talo: ' + id + '  -  date:  ' + date + ' time: ' + time);
 
-    db.setHouseState(id, state, aika, function(err) {
+    db.setHouseState(id, state, date, time, function(err) {
        if (err)
        {
             res.status(500);
