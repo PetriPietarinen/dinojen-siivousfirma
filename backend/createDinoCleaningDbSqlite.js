@@ -28,14 +28,25 @@ stmt.finalize();
 
 var sqlQueryCreateHousesTable = "CREATE TABLE houses (" +
     "id INTEGER PRIMARY KEY, " +
-    "name TEXT NOT NULL, " +
-    "description TEXT NOT NULL, " +
-    "pm TEXT NOT NULL, " +
-    "worker TEXT NOT NULL, " +
-    "date TEXT NOT NULL, " +
-    "time TEXT NOT NULL, " +
-    "done INTEGER NOT NULL)";
-    
+/*    "name TEXT, " +
+    "description TEXT, " +
+    "pm TEXT, " +
+    "worker TEXT, " +
+    "date TEXT, " +
+    "time TEXT, " +
+    "done INTEGER)";
+*/    
+    "name TEXT NOT NULL DEFAULT 'talo', " +
+    "description TEXT NOT NULL DEFAULT 'asoy', " +
+    "pm TEXT NOT NULL DEFAULT 'iisoy', " +
+    "worker TEXT NOT NULL DEFAULT 'poika', " +
+    "date TEXT NOT NULL DEFAULT '2018', " +
+    "time TEXT NOT NULL DEFAULT 'nyt', " +
+    "done INTEGER NOT NULL DEFAULT 0)";
+
+
+
+
 db.run(sqlQueryCreateHousesTable);  
 
 var stmt2 = db.prepare("INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES (NULL,?,?,?,?,?,?,?)");

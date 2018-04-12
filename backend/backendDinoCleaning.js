@@ -115,7 +115,7 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
     let state = req.params.state;
     let currentdate = new Date(); 
     let date = currentdate.getDate() + "." + (currentdate.getMonth()+1)  + "." + currentdate.getFullYear();
-    let time = currentdate.getHours() + ":" + currentdate.getMinutes();
+    let time = currentdate.getHours() + ":" + (currentdate.getMinutes()<10?'0':'') + currentdate.getMinutes();
 
    
        
@@ -139,6 +139,8 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
 // Testaus: 
 // curl -H "Content-Type: application/json" -X POST -d '{"name":"Nahkatehtaankatu 3","description":"Epilässä"}' http://localhost:3000/dinoCleaning/houses/add
 app.post('/' + apiName + '/houses/add', function(req, res){
+    
+   
     db.addNewHouse(req.body, function(err) {
        if (err)
        {

@@ -50,10 +50,16 @@ exports.setHouseState = function(id, state, date, time, callback) {
 };
 
 exports.addNewHouse = function(body, callback) {
-    console.log('addNewHouse');
+    console.log('Lisätään talo');
     console.log(body);
-    let sql = 'INSERT INTO houses(name, description, done) VALUES(?,?,0)';
-    let data = [body.name, body.description];
+
+    // let sql = 'INSERT INTO houses(name, description, done) VALUES(?,?,0)';
+    // let data = [body.name, body.description];
+
+
+    let sql = 'INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES(NULL,?,0,0,0,0,0,0)';
+    let data = [body.name];
+   
     db.run(sql, data, function(err) {
         if (err)
         {
