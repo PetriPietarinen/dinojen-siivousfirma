@@ -57,8 +57,8 @@ exports.addNewHouse = function(body, callback) {
     // let data = [body.name, body.description];
 
 
-    let sql = 'INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES(NULL,?,0,0,0,0,0,0)';
-    let data = [body.name];
+    let sql = 'INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES(NULL,?,?,?,?,0,0,0)';
+    let data = [body.name.name, body.name.description, body.name.pm, body.name.worker];
    
     db.run(sql, data, function(err) {
         if (err)
