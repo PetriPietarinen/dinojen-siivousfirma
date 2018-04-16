@@ -30,6 +30,13 @@ exports.getUserById = function(id, callback) {
     });
 };
 
+exports.getUserByName = function(name, callback) {
+    let sql = 'SELECT * FROM users WHERE username = ?';
+    db.get(sql, [name], function(err, rows) {
+        callback(err, rows);
+    });
+};
+
 exports.getHouseById = function(id, callback) {
     let sql = 'SELECT * FROM houses WHERE id = ?';
     db.get(sql, [id], function(err, rows) {
@@ -63,18 +70,5 @@ exports.addNewHouse = function(body, callback) {
     });        
 };
 
-/*
-// Seuraavalla funktiolla voitaisiin periaatteessa dataa mistä tahansa taulusta minkä tahansa kentän arvolla
-// Ehkä hieman kyseenalaista käyttää tällaista...mahdollistaisi periaatteessa pääsyn mihin vain...
-exports.getFromAnyTableByAnyField = function(table, field, value, callback) {
-    console.log('table: ' + table);
-    console.log('field: ' + field);
-    console.log('value: ' + value);
-    let sql = 'SELECT * FROM ' + table + ' WHERE ' + field + ' = ?';
-    db.all(sql, [value], function(err, rows) {
-        callback(err, rows);
-    });
-};
-*/
 
 
