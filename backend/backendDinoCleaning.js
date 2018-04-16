@@ -96,9 +96,9 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
         }        
         else if (data)
         {
-            console.log('Palaute: ' + data.name);
+     //       console.log('Palaute: ' + data.name);
             res.json(data);   
-            console.log(data);
+     //       console.log(data);
         }
         else
         {
@@ -114,15 +114,20 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
 app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
     let id = req.params.id;
     let state = req.params.state;
-    let currentdate = new Date(); 
-    let date = currentdate.getDate() + "." + (currentdate.getMonth()+1)  + "." + currentdate.getFullYear();
-    let time = currentdate.getHours() + ":" + (currentdate.getMinutes()<10?'0':'') + currentdate.getMinutes();
+    console.log('State ' + state);
+    if (state == 1){
+        let currentdate = new Date(); 
+        let date = currentdate.getDate() + "." + (currentdate.getMonth()+1)  + "." + currentdate.getFullYear();
+        let time = currentdate.getHours() + ":" + (currentdate.getMinutes()<10?'0':'') + currentdate.getMinutes();
+        db.setHouseState(id, state, date, time, function(err) {})
+        console.log('Siivotaan talo: ', id + '  -  date:  ', date, ' time: ', time);
+    }
+        else{
+            db.setHouseDirt(id, state, function(err) {});
+            console.log('Sotketaan talo: ', id );
+        }
 
-   
-       
-    console.log('Siivotaan talo: ', id + '  -  date:  ', date, ' time: ', time);
-
-    db.setHouseState(id, state, date, time, function(err) {})
+//     db.setHouseState(id, state, date, time, function(err) {})
     db.getHouses( function(err, data) {
         if (err)
             {
@@ -131,9 +136,9 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
             }        
             else if (data)
             {
-                console.log('Haetaan kaikkien talon tiedot: ' + data);
+              //  console.log('Haetaan kaikkien talon tiedot: ' + data);
                 res.json(data);   
-                console.log(data);
+             //   console.log(data);
             }
             else
             {
@@ -208,6 +213,45 @@ app.post('/' + apiName + '/houses/add', function(req, res){
        } */      
    // });
 });
+
+
+// Edit siivouskohde
+app.post('/' + apiName + '/edit/:id', function(req, res){
+    console.log('Edit body= ', req.body);
+     
+    db.editHouse(req.body, function(err) {});
+    
+    db.getHouses(function(err, data) {
+        // console.log('Muokattiin, sitten haetaan kaikki talot : ', data);
+        if (err)
+        {
+            res.status(500);
+            res.json({message: err.message});
+        }        
+        else if (data && data.length > 0)
+        {
+            res.json(data);   
+        }
+        else
+        {
+            res.status(404);
+            res.json({message: "No data"});
+        }   
+    });/*
+       if (err)
+       {
+            res.status(500);
+            res.json({message: err.message});
+       }
+       else
+       {
+            res.status(200);
+            res.json({message: 'Done'});
+       } */      
+   // });
+});
+
+
 
 /*
 // Seuraavalla funktiolla voitaisiin periaatteessa dataa mistä tahansa taulusta minkä tahansa kentän arvolla

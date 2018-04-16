@@ -49,6 +49,39 @@ exports.setHouseState = function(id, state, date, time, callback) {
     });
 };
 
+exports.setHouseDirt = function(id, state, callback) {
+    let sql = 'UPDATE houses SET done = ? WHERE id = ?';
+    let data = [state, id];
+    db.run(sql, data, function(err) {
+        if (err)
+        {
+            return callback(err);
+        }
+        return callback(null);
+    });
+};
+
+exports.editHouse = function(body, callback) {
+    console.log('Muokataan taloa : ');
+    console.log(body);
+
+    let sql = 'UPDATE houses SET name = ?, description = ?, pm = ?, worker = ? WHERE id = ?';
+    let data = [body.id.name, body.id.description, body.id.pm, body.id.worker, body.id.id];
+   
+    console.log('sql= ', sql, 'ja data= ', data);
+
+    db.run(sql, data, function(err) {
+        if (err)
+        {
+            console.log('Error:', err);
+            return callback(err);
+        }
+        console.log('Toimiko edit');
+        return callback(null);
+    });        
+};
+
+
 exports.addNewHouse = function(body, callback) {
     console.log('Lisätään talo');
     console.log(body);
