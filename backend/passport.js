@@ -1,4 +1,9 @@
-// config/passport.js
+/*
+ *  passport.js
+ *  Käyttäjän autentikointi passport.js moduulin avulla.
+ *  Created by Petri Pietarinen
+ *  Date: 16.4.2018
+ */
 
 var passwordHash = require('password-hash');
 
@@ -19,19 +24,23 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, done) {
+        console.log('serializeUser');
+        console.log(user);
         done(null, user.id);
     });
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
 
-        db.getUserByName(id, function(err, row) {
+        console.log('deserializeUser:' + id);
+
+        db.getUserById(id, function(err, row) {
             if (!row)
             {
                 console.log('deserialize, not found');
                 return done(null, false);
             }
-            console.log('deserialize, found');
+            //console.log('deserialize, found');
             return done(null, row);
           });
     });
@@ -44,7 +53,7 @@ module.exports = function(passport) {
             if (!row) 
             {
                 console.log('username not found');
-                return done(null, false);
+                return done(null, false, { message: 'Incorrect username'});
             }
 
             /*
@@ -59,7 +68,7 @@ module.exports = function(passport) {
             if (hashedPassword.localeCompare(row.password) != 0)
             {
                 console.log('password check failed: ' + hashedPassword + ' != ' + row.password);
-                return done(null, false);
+                return done(null, false, { message: 'Incorrect password' });
             }   
 
             return done(null, row);
