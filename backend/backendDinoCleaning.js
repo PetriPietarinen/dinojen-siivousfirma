@@ -88,7 +88,7 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
 
     console.log('Haetaan tiedot talosta: ' + id);
 
-    db.getHouseById(id, function(err, data) {
+    db.getHouses(function(err, data) {
         if (err)
         {
             res.status(500);
@@ -123,7 +123,7 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
     console.log('Siivotaan talo: ', id + '  -  date:  ', date, ' time: ', time);
 
     db.setHouseState(id, state, date, time, function(err) {})
-    db.getHouseById(id, function(err, data) {
+    db.getHouses( function(err, data) {
         if (err)
             {
                 res.status(500);
@@ -131,7 +131,7 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
             }        
             else if (data)
             {
-                console.log('Haetaan siivotun talon tiedot: ' + data.name);
+                console.log('Haetaan kaikkien talon tiedot: ' + data);
                 res.json(data);   
                 console.log(data);
             }
