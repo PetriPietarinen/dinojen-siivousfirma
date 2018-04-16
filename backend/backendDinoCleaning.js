@@ -96,6 +96,7 @@ app.get('/' + apiName + '/houses/:id', function(req, res){
         }        
         else if (data)
         {
+            console.log('Palaute: ' + data.name);
             res.json(data);   
             console.log(data);
         }
@@ -119,22 +120,58 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
 
    
        
-    console.log('Siivotaan talo: ' + id + '  -  date:  ' + date + ' time: ' + time);
+    console.log('Siivotaan talo: ', id + '  -  date:  ', date, ' time: ', time);
 
-    db.setHouseState(id, state, date, time, function(err) {
-       if (err)
+    db.setHouseState(id, state, date, time, function(err) {})
+    db.getHouseById(id, function(err, data) {
+        if (err)
+            {
+                res.status(500);
+                res.json({message: err.message});
+            }        
+            else if (data)
+            {
+                console.log('Haetaan siivotun talon tiedot: ', data.name);
+                res.json(data);   
+                console.log(data);
+            }
+            else
+            {
+                res.status(404);
+                res.json({message: "Not Found"});
+            }   
+        });
+    });
+
+/*       if (err)
        {
             res.status(500);
             res.json({message: err.message});
        }
        else
        {
-            res.status(200);
-            res.json({message: 'Done'});
-       }       
-    });
-});
+        db.getHouseById(id, function(err, data) {
+            if (err)
+            {
+                res.status(500);
+                res.json({message: err.message});
+            }        
+            else (data)
+            {
+                console.log('Palaute: ' + data.name);
+                res.json(data);   
+                console.log(data);
+            } 
+        
 
+
+            // res.status(200);
+            // res.json({message: id});
+              
+    });
+       })
+});
+*/
 // lisätään uusi siivouskohde
 // Testaus: 
 // curl -H "Content-Type: application/json" -X POST -d '{"name":"Nahkatehtaankatu 3","description":"Epilässä"}' http://localhost:3000/dinoCleaning/houses/add
@@ -181,6 +218,6 @@ app.get('/' + apiName + '/:table/:field/:value', function(req, res) {
 });
 */ 
 
-console.log('Tötteröö - kuuntelen porttia ' + portti);
+console.log('Tötteröö - kuuntelen porttia ', portti);
 app.listen(portti);
 
