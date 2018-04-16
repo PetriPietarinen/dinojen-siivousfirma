@@ -131,7 +131,7 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
             }        
             else if (data)
             {
-                console.log('Haetaan siivotun talon tiedot: ', data.name);
+                console.log('Haetaan siivotun talon tiedot: ' + data.name);
                 res.json(data);   
                 console.log(data);
             }
@@ -178,7 +178,24 @@ app.post('/' + apiName + '/houses/done/:id/:state', function(req, res){
 app.post('/' + apiName + '/houses/add', function(req, res){
     
    
-    db.addNewHouse(req.body, function(err) {
+    db.addNewHouse(req.body, function(err) {})
+    db.getHouses(function(err, data) {
+        console.log('Lisättiin talo, sitten haetaan kaikki talot : ', data);
+        if (err)
+        {
+            res.status(500);
+            res.json({message: err.message});
+        }        
+        else if (data && data.length > 0)
+        {
+            res.json(data);   
+        }
+        else
+        {
+            res.status(404);
+            res.json({message: "No data"});
+        }   
+    });/*
        if (err)
        {
             res.status(500);
@@ -188,8 +205,8 @@ app.post('/' + apiName + '/houses/add', function(req, res){
        {
             res.status(200);
             res.json({message: 'Done'});
-       }       
-    });
+       } */      
+   // });
 });
 
 /*
@@ -218,6 +235,6 @@ app.get('/' + apiName + '/:table/:field/:value', function(req, res) {
 });
 */ 
 
-console.log('Tötteröö - kuuntelen porttia ', portti);
+console.log('Tötteröö - kuuntelen porttia ' + portti);
 app.listen(portti);
 
