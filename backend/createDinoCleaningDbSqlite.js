@@ -51,11 +51,11 @@ db.run(sqlQueryCreateHousesTable);
 
 var stmt2 = db.prepare("INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES (NULL,?,?,?,?,?,?,?)");
 
-stmt2.run("Kanjoninkatu 3", "As Oy Satoisäntä", "Isännöinti Salonen Ilpo Ky", "Heli", "24.3.2018", 0, 1);
-stmt2.run("Vilppulanpolku 6", "As. Oy Pohjanneito", "Isännöinti Salonen Ilpo Ky", "Meri", "11.4.2018", 0, 1);
-stmt2.run("Nosturinraitti 2", "AS OY ANNENPIRTTI", "Isännöinti Ilkka Saarinen Oy", "Tiina", "16.4.2018", 0, 1);
-stmt2.run("Kanjoninkatu 11", "AS OY SATOTÄTI", "Isännöinti Ilkka Saarinen Oy", "Satu", "1.4.2018", 0, 1);
-stmt2.run("Lindforsinkatu 12", "As.Oy Rantasentteri", "Isännöintipalvelu Männistö", "Milla", 0, 0, 0);
+stmt2.run("Kanjoninkatu 3", "As Oy Satoisäntä", "Isännöinti Salonen Ilpo Ky", "Heli", "24.3.2018", "11:50", 1);
+stmt2.run("Vilppulanpolku 6", "As. Oy Pohjanneito", "Isännöinti Salonen Ilpo Ky", "Meri", "11.4.2018", "9:10", 1);
+stmt2.run("Nosturinraitti 2", "AS OY ANNENPIRTTI", "Isännöinti Ilkka Saarinen Oy", "Tiina", "16.4.2018", "15:50", 1);
+stmt2.run("Kanjoninkatu 11", "AS OY SATOTÄTI", "Isännöinti Ilkka Saarinen Oy", "Satu", "1.4.2018", "14:33", 1);
+stmt2.run("Lindforsinkatu 12", "As.Oy Rantasentteri", "Isännöintipalvelu Männistö", "Milla", "9.4.2018", "12:33", 1);
 stmt2.run("Insinöörinkatu 52", "As Oy Ahvenisrinne", "Isännöintipalvelu Männistö", "Helena", 0, 0, 0);
 stmt2.run("Kanjoninkatu 5", "As.Oy Tampereen Satokehrääjä", "Tili- ja Isännöintikeskus T.I.K. Oy", "Heli", 0, 0, 0);
 stmt2.run("Insinöörinkatu 22", "AS OY VALTAPOHJA", "Isännöinti Ilkka Saarinen Oy", "Meri", 0, 0, 0);
