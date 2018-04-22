@@ -5,8 +5,12 @@
     Date: 2.4.2018
 */
 
+var NodeGeocoder = require('node-geocoder');
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('./DinoCleaningDbSqlite.db');
+var lat = 0;
+var lon = 0;
+
 
 
 exports.getUsers = function(callback) {
@@ -86,20 +90,44 @@ exports.addNewHouse = function(body, callback) {
     console.log('Lisätään talo');
     console.log(body);
 
-    // let sql = 'INSERT INTO houses(name, description, done) VALUES(?,?,0)';
-    // let data = [body.name, body.description];
+    
 
-
-    let sql = 'INSERT INTO houses(id, name, description, pm, worker, date, time, done) VALUES(NULL,?,?,?,?,0,0,0)';
-    let data = [body.name.name, body.name.description, body.name.pm, body.name.worker];
+    var geocoder = NodeGeocoder({
+        provider: 'opencage',
+        apiKey: '4a245ed908b745ba8b0f71cbd8d6e12a'
+      });
    
-    db.run(sql, data, function(err) {
-        if (err)
-        {
-            return callback(err);
-        }
-        return callback(null);
-    });        
+      console.log(body.name.name +' tampere');
+
+      geocoder.geocode(body.name.name,+', tampere')
+        .then(function(res) {
+        let sql = 'INSERT INTO houses(id, name, description, pm, worker, lat, lon, date, time, done) VALUES(NULL,?,?,?,?,?,?,0,0,0)';
+        let data = [body.name.name, body.name.description, body.name.pm, body.name.worker, res[0].latitude, res[0].longitude];
+        console.log('Geocoder:', res);
+        console.log('LAT: ', res[0].latitude);
+        console.log('LON: ', res[0].longitude);
+        db.run(sql, data, function(err) {
+            if (err)
+            {
+                console.log('ei lisätty: ', err);
+                return callback(err);
+            }
+            console.log('Lisättiin talo');
+            return callback(null);
+            }); 
+        })  
+        .catch(function(err) {
+            console.log(err);
+          });
+
+     
+
+
+
+//    let sql = 'INSERT INTO houses(id, name, description, pm, worker, lat, lon, date, time, done) VALUES(NULL,?,?,?,?,?,?,0,0,0)';
+//    let data = [body.name.name, body.name.description, body.name.pm, body.name.worker, lat, lon];
+   
+       
 };
 
 /*
