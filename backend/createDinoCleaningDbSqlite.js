@@ -50,15 +50,15 @@ stmt2.run("Vilppulanpolku 6", "As. Oy Pohjanneito", "Isännöinti Salonen Ilpo K
 stmt2.run("Nosturinraitti 2", "AS OY ANNENPIRTTI", "Isännöinti Ilkka Saarinen Oy", "Tiina", "61.442655", "23.850718", "16.4.2018", "15:50", 1);
 stmt2.run("Kanjoninkatu 11", "AS OY SATOTÄTI", "Isännöinti Ilkka Saarinen Oy", "Satu", "61.456886", "23.840233", "1.4.2018", "14:33", 1);
 stmt2.run("Lindforsinkatu 12", "As.Oy Rantasentteri", "Isännöintipalvelu Männistö", "Milla", "61.450111", "23.845147", "9.4.2018", "12:33", 1);
-stmt2.run("Insinöörinkatu 52", "As Oy Ahvenisrinne", "Isännöintipalvelu Männistö", "Helena", 0, 0, 0, 0, 0);
-stmt2.run("Kanjoninkatu 5", "As.Oy Tampereen Satokehrääjä", "Tili- ja Isännöintikeskus T.I.K. Oy", "Heli", 0, 0, 0, 0, 0);
-stmt2.run("Insinöörinkatu 22", "AS OY VALTAPOHJA", "Isännöinti Ilkka Saarinen Oy", "Meri", 0, 0, 0, 0, 0);
-stmt2.run("Kemiankatu 4", "AS OY PÄHKINÄNAKKELI", "Isännöinti Ilkka Saarinen Oy", "Tiina", 0, 0, 0, 0, 0);
-stmt2.run("Insinöörinkatu 24 ", "AS OY VALTAPIHA", "Isännöinti Ilkka Saarinen Oy", "Satu", 0, 0, 0, 0, 0);
-stmt2.run("Opiskelijankatu 15", "As.OY Tasatuomo", "Isännöinti Ilkka Saarinen Oy", "Milla", 0, 0, 0, 0, 0);
-stmt2.run("Orivedenkatu 20", "As Oy Torisevankallio", "Kiinteistöpalvelu Staras Oy ", "Helena", 0, 0, 0, 0, 0);
-stmt2.run("Opinpolku 1", "AS OY AHVENISKALLIO", "Isännöinti Ilkka Saarinen Oy", "Heli", 0, 0, 0, 0, 0);
-stmt2.run("Elementinpolku 15", "As.Oy Raimonraitti", "Tampereen KV-Isännöinti Oy", "Meri", 0, 0, 0, 0, 0);
+stmt2.run("Insinöörinkatu 52", "As Oy Ahvenisrinne", "Isännöintipalvelu Männistö", "Helena", "61.448205", "23.851725", 0, 0, 0);
+stmt2.run("Kanjoninkatu 5", "As.Oy Tampereen Satokehrääjä", "Tili- ja Isännöintikeskus T.I.K. Oy", "Heli", "61.457665", "23.843141", 0, 0, 0);
+stmt2.run("Insinöörinkatu 22", "AS OY VALTAPOHJA", "Isännöinti Ilkka Saarinen Oy", "Meri", "61.452722", "23.847458", 0, 0, 0);
+stmt2.run("Kemiankatu 4", "AS OY PÄHKINÄNAKKELI", "Isännöinti Ilkka Saarinen Oy", "Tiina", "61.445364", "23.840902", 0, 0, 0);
+stmt2.run("Insinöörinkatu 24", "AS OY VALTAPIHA", "Isännöinti Ilkka Saarinen Oy", "Satu", "61.452512", "23.847627", 0, 0, 0);
+stmt2.run("Opiskelijankatu 15", "As.OY Tasatuomo", "Isännöinti Ilkka Saarinen Oy", "Milla", "61.451471", "23.843642", 0, 0, 0);
+stmt2.run("Orivedenkatu 20", "As Oy Torisevankallio", "Kiinteistöpalvelu Staras Oy ", "Helena", "61.454746", "23.840354", 0, 0, 0);
+stmt2.run("Opinpolku 1", "AS OY AHVENISKALLIO", "Isännöinti Ilkka Saarinen Oy", "Heli", "61.448453", "23.833553", 0, 0, 0);
+stmt2.run("Elementinpolku 15", "As.Oy Raimonraitti", "Tampereen KV-Isännöinti Oy", "Meri", "61.442952", "23.851117", 0, 0, 0);
 stmt2.finalize();
   
 

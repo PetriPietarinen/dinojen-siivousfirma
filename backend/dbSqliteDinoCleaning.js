@@ -94,12 +94,15 @@ exports.addNewHouse = function(body, callback) {
 
     var geocoder = NodeGeocoder({
         provider: 'opencage',
-        apiKey: '4a245ed908b745ba8b0f71cbd8d6e12a'
+        apiKey: '4a245ed908b745ba8b0f71cbd8d6e12a',
+        language: 'fi'
       });
    
+// bounds: 23.564538, 51.280430 , 0.278970,51.683979}
+
       console.log(body.name.name +' tampere');
 
-      geocoder.geocode(body.name.name,+', tampere')
+      geocoder.geocode(body.name.name +', tampere')
         .then(function(res) {
         let sql = 'INSERT INTO houses(id, name, description, pm, worker, lat, lon, date, time, done) VALUES(NULL,?,?,?,?,?,?,0,0,0)';
         let data = [body.name.name, body.name.description, body.name.pm, body.name.worker, res[0].latitude, res[0].longitude];
