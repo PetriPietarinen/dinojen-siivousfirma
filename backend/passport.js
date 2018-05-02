@@ -40,19 +40,19 @@ module.exports = function(passport) {
                 console.log('deserialize, not found');
                 return done(null, false);
             }
-            //console.log('deserialize, found');
+           console.log('deserialize, found rivi: ', row);
             return done(null, row);
           });
     });
 
     passport.use(new LocalStrategy(function(username, password, done) {
 
-        console.log('passport.use, username: ' + username);
+        console.log('passport.use: username: ', username, ' salasana:', password);
 
         db.getUserByName(username, function(err, row) {
             if (!row) 
             {
-                console.log('username not found');
+                console.log('Käyttäjää ei löydy');
                 return done(null, false, { message: 'Incorrect username'});
             }
 
@@ -67,7 +67,7 @@ module.exports = function(passport) {
 
             if (hashedPassword.localeCompare(row.password) != 0)
             {
-                console.log('password check failed: ' + hashedPassword + ' != ' + row.password);
+                console.log('Salasana check failed: ' + hashedPassword + ' != ' + row.password);
                 return done(null, false, { message: 'Incorrect password' });
             }   
 
